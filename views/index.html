@@ -8,8 +8,9 @@
 <h1>Imposters</h1>
 <nav class="topNav">
   <div>
-    <button id="btn-paradiso" class="building active" value="0">Paradiso</button>
-    <button id="btn-paradiso" class="building" value="1">Melkweg</button>
+    {% for building in buildings %}
+    <button id="btn-paradiso" class="building {% if loop.index === 1 %}active{% endif %}" value="{{ loop.index }}">{{ building.name }}</button>
+    {% endfor %}
   </div>
 </nav>
 <nav class="subNav">
@@ -20,7 +21,7 @@
   </div>
 </nav>
 <div class="posters main-carousel">
-  {% for poster in data %}
+  {% for poster in posters %}
   <article class="carousel-cell">
     <div class="poster-text">
       <h1>{{ poster.title }}</h1>
