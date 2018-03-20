@@ -56,8 +56,8 @@
       if (this.isFlkty) {
         this.flkty.destroy()
       }
-      helper.replaceHTML(this.elements.posters, posters)
-      let elem = document.querySelector('.main-carousel');
+      // helper.replaceHTML(this.elements.posters, posters)
+      let elem = document.querySelector('.main-carousel')
       this.flkty = new Flickity(elem, {
         wrapAround: true
       })
@@ -188,11 +188,6 @@
           }
           return obj
         })
-        // let anImg = new Image()
-        // anImg.src = usefulData[0].url
-        // anImg.addEventListener('load', () => {
-        //   console.log('loaded')
-        // })
         window.localStorage.setItem(`${this.buildings[this.currentBuilding].name.toLowerCase()}_posters`, JSON.stringify(usefulData))
         app.render(usefulData)
         loaded++
@@ -259,17 +254,6 @@
     replaceHTML: function (element, string) { // empty html and insert new value
       this.emptyElement(element)
       element.insertAdjacentHTML('beforeend', string)
-    },
-    checkImg: function (imageUrl, callBack) {
-      var imageData = new Image()
-      imageData.onload = function () {
-        callBack(true)
-      }
-      imageData.onerror = function (e) {
-        e.preventDefault()
-        callBack(false)
-      }
-      imageData.src = imageUrl
     }
   }
   app.init()

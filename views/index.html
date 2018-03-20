@@ -20,5 +20,14 @@
   </div>
 </nav>
 <div class="posters main-carousel">
+  {% for poster in data %}
+  <article class="carousel-cell">
+    <div class="poster-text">
+      <h1>{{ poster.title }}</h1>
+      <h1>{{ poster.date }}</h1>
+    </div>
+    <img src="{{ poster.url }}" alt="">
+  </article>
+  {% endfor %}
 </div>
 {% include "partials/footer.html" %}
