@@ -2,8 +2,6 @@ const gulp = require('gulp')
 const sass = require('gulp-sass')
 const babel = require('gulp-babel')
 const nodemon = require('gulp-nodemon')
-const connect = require('gulp-connect')
-const open = require('gulp-open')
 
 const sources = {
   sass: 'build/src/styles/**/*.scss',
@@ -28,7 +26,6 @@ gulp.task('sass', () => {
   return gulp.src('build/src/styles/main.scss')
     .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
     .pipe(gulp.dest(`${outputDir}/css`))
-    .pipe(connect.reload())
 })
 
 // Convert to es5, uglify and move js files
@@ -38,7 +35,6 @@ gulp.task('js', () => {
       presets: ['es2015']
     }))
     .pipe(gulp.dest(`${outputDir}/js`))
-    .pipe(connect.reload())
 })
 
 // Watch html, sass and js
@@ -63,20 +59,4 @@ gulp.task('develop', function () {
   })
 })
 
-// Start server
-gulp.task('connect', () => {
-  connect.server({
-    name: 'App',
-    root: 'app',
-    port: 8001,
-    livereload: true
-  })
-})
-
-// Open browser
-gulp.task('open', () => {
-  gulp.src('')
-  .pipe(open({uri: 'http://localhost:8001'}))
-})
-
-gulp.task('default', ['copy', 'sass', 'js', 'watch', 'develop', 'connect'])
+gulp.task('default', ['copy', 'sass', 'js', 'watch', 'develop'])
