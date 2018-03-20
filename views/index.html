@@ -1,0 +1,24 @@
+{% include "partials/header.html" %}
+<div class="background">
+  <div class="layer"></div>
+</div>
+<div id="loader-wrapper">
+    <div id="loader"></div>
+</div>
+<h1>Imposters</h1>
+<nav class="topNav">
+  <div>
+    <button id="btn-paradiso" class="building active" value="0">Paradiso</button>
+    <button id="btn-paradiso" class="building" value="1">Melkweg</button>
+  </div>
+</nav>
+<nav class="subNav">
+  <div>
+    <button id="btn-dateOne" class="date active" value="0">Seventies</button>
+    <button id="btn-dateTwo" class="date" value="1">Eighties</button>
+    <button id="btn-dateThree" class="date" value="2">Nineties</button>
+  </div>
+</nav>
+<div class="posters main-carousel">
+</div>
+{% include "partials/footer.html" %}
