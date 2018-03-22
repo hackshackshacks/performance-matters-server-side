@@ -1,6 +1,12 @@
 {% include "partials/header.html" %}
-<div class="background">
-  <div class="layer"></div>
+<style>
+  .background {
+    background-image: url("{{ background }}")
+  }
+</style>
+<div class="background"></div>
+<div id="loader-wrapper" class="hidden">
+    <div id="loader"></div>
 </div>
 <h1>Imposters</h1>
 <nav class="topNav">
