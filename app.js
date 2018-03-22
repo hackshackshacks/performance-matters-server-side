@@ -3,7 +3,7 @@ const app = express()
 const nunjucks = require('nunjucks')
 const request = require('request')
 
-app.use(express.static(`${__dirname}/dist`))
+app.use(express.static(`${__dirname}/assets`))
 
 nunjucks.configure('views', {
   autoescape: true,
