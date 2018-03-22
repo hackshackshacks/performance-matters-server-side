@@ -13,29 +13,30 @@ nunjucks.configure('views', {
 const buildings = [
   {
     name: 'Paradiso',
-    address: 'Weteringschans 6',
-    dateRange: [
-      ['1968-05-23T10:20:13+05:30', '1972-05-23T10:20:13+05:30'],
-      ['1972-05-23T10:20:13+05:30', '1975-05-23T10:20:13+05:30'],
-      ['1975-05-23T10:20:13+05:30', '1980-05-23T10:20:13+05:30'],
-      ['1980-05-23T10:20:13+05:30', '1990-05-23T10:20:13+05:30'],
-      ['1990-05-23T10:20:13+05:30', '2100-05-23T10:20:13+05:30']
-    ]
+    smallName: 'paradiso',
+    address: 'Weteringschans 6'
   },
   {
     name: 'Melkweg',
-    address: 'Lijnbaansgracht 234A',
-    dateRange: [
-      ['1968-05-23T10:20:13+05:30', '2017-05-23T10:20:13+05:30'],
-      ['1972-05-23T10:20:13+05:30', '1975-05-23T10:20:13+05:30'],
-      ['1975-05-23T10:20:13+05:30', '1980-05-23T10:20:13+05:30'],
-      ['1980-05-23T10:20:13+05:30', '1990-05-23T10:20:13+05:30'],
-      ['1990-05-23T10:20:13+05:30', '2100-05-23T10:20:13+05:30']
-    ]
+    smallName: 'melkweg',
+    address: 'Lijnbaansgracht 234A'
   }
 ]
-
-app.get('/', (req, res) => {
+const times = [
+  {
+    name: 'Seventies',
+    smallName: 'seventies'
+  },
+  {
+    name: 'Eighties',
+    smallName: 'eighties'
+  },
+  {
+    name: 'Nineties',
+    smallName: 'nineties'
+  }
+]
+function generatePosterUrl (title, dateOne, dateTwo) {
   let query = `
     PREFIX dc: <http://purl.org/dc/elements/1.1/>
     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
@@ -45,17 +46,37 @@ app.get('/', (req, res) => {
       ?poster dc:title ?title .
       ?poster dc:subject "Music."^^xsd:string .
       ?poster foaf:depiction ?img .
-      FILTER REGEX(?title, "${buildings[0].title}") .
+      FILTER REGEX(?title, "${title}") .
       ?poster sem:hasBeginTimeStamp ?date .
-      FILTER (?date > "${buildings[0].dateRange[0][0]}"^^xsd:dateTime && ?date < "${buildings[0].dateRange[0][1]}"^^xsd:dateTime)
+      FILTER (?date > "${dateOne}"^^xsd:dateTime && ?date < "${dateTwo}"^^xsd:dateTime)
     }
     ORDER BY ?date
   `
+  console.log(query)
   let encodedQuery = encodeURIComponent(query)
-  let url = `https://api.data.adamlink.nl/datasets/AdamNet/all/services/endpoint/sparql?default-graph-uri=&query=${encodedQuery}&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on`
-
+  return `https://api.data.adamlink.nl/datasets/AdamNet/all/services/endpoint/sparql?default-graph-uri=&query=${encodedQuery}&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on`
+}
+function generateDates (time) {
+  if (time === 'seventies') {
+    return ['1970-01-01T00:00:00+05:30', '1980-01-01T00:00:00+05:30']
+  } else if (time === 'eighties') {
+    return ['1980-01-01T00:00:00+05:30', '1990-01-01T00:00:00+05:30']
+  } else if (time === 'nineties') {
+    return ['1990-01-01T00:00:00+05:30', '2000-01-01T00:00:00+05:30']
+  }
+}
+function capitalizeFirst (string) {
+  return string.charAt(0).toUpperCase() + string.slice(1)
+}
+app.get('/', (req, res) => {
+  res.redirect('/paradiso/seventies')
+})
+app.get('/:building/:time', (req, res) => {
+  let dates = generateDates(req.params.time)
+  let url = generatePosterUrl(capitalizeFirst(req.params.building), dates[0], dates[1])
   let posters
   request(url, (error, response, body) => {
+    console.log('error:', error)
     let data = JSON.parse(body).results.bindings
     posters = data.map((item) => {
       let obj = {
@@ -65,14 +86,15 @@ app.get('/', (req, res) => {
       }
       return obj
     })
-    console.log(posters)
     res.render('index.html', {
       buildings: buildings,
+      times: times,
+      currentBuilding: req.params.building,
+      currentTime: req.params.time,
       posters: posters
     })
   })
 })
-
 app.listen(8001, () => {
   console.log('Listening.. port 8001')
 })
