@@ -30,7 +30,7 @@
       <h1>{{ poster.title }}</h1>
       <h1>{{ poster.date }}</h1>
     </div>
-    <img src="{{ poster.url }}" alt="">
+    <img src="{{ poster.url }}" srcset="{{ poster.url }} 1x, {{ poster.url2 }} 2x" alt="">
   </article>
   {% endfor %}
 </div>

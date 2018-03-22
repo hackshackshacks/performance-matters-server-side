@@ -87,7 +87,8 @@ const api = {
         let obj = {
           title: item.title.value,
           date: item.date.value,
-          url: item.img.value
+          url: item.img.value,
+          url2: item.img.value.replace('level3', 'level2')
         }
         return obj
       })
