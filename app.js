@@ -130,6 +130,10 @@ const helper = {
 }
 
 core.init()
+setInterval(() => {
+  console.log('ckkkaaaasssss')
+  core.init()
+}, 5000)
 app.get('/', (req, res) => {
   res.redirect('/paradiso/seventies')
 })
@@ -151,6 +155,7 @@ app.get('/:building/:time', (req, res) => {
     background: core.backgrounds[helper.randomize(0, core.backgrounds.length)].url
   })
 })
+
 app.listen(8001, () => {
   console.log('Listening.. port 8001')
 })
