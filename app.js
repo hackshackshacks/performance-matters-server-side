@@ -5,7 +5,7 @@ const request = require('request')
 
 app.use(express.static(`${__dirname}/assets`))
 
-nunjucks.configure('views', {
+nunjucks.configure('assets/views', {
   autoescape: true,
   express: app
 })
@@ -133,7 +133,7 @@ core.init()
 setInterval(() => {
   console.log('ckkkaaaasssss')
   core.init()
-}, 5000)
+}, 1000 * 60 * 60 * 24)
 app.get('/', (req, res) => {
   res.redirect('/paradiso/seventies')
 })

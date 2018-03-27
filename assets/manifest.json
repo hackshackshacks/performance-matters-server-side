@@ -3,7 +3,7 @@
   "short_name": "Imposters",
   "description": null,
   "dir": "auto",
-  "lang": "nl",
+  "lang": "nl-NL",
   "display": "standalone",
   "start_url": "/?homescreen=1",
   "background_color": "#5E4485",
