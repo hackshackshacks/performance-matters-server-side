@@ -4,7 +4,9 @@ self.addEventListener('install', event => event.waitUntil(
             '/views/offline/',
             '/css/main.css',
             '/js/bundle.js'
-      ]))
+      ])),
+      caches.open('v1-pages')
+      .then(cache => cache.add('/'))
       .then(self.skipWaiting())
 ));
 

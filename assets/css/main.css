@@ -179,6 +179,16 @@ nav.topNav button {
   text-transform: uppercase;
 }
 
+.offline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.5rem;
+  background: dodgerblue;
+  text-align: center;
+}
+
 .main-carousel {
   width: 60%;
   margin: 5rem auto;

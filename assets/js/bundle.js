@@ -3,13 +3,31 @@
 
 var jquery = require('jquery');
 var Flickity = require('flickity');
-
+var offline = require('./offline.js');
 var element = document.querySelector('.main-carousel');
 
-var flkty = new Flickity(element, {
-  wrapAround: true
-});
-},{"flickity":10,"jquery":17}],2:[function(require,module,exports){
+offline.init()
+
+if (element) {
+  var flkty = new Flickity(element, {
+    wrapAround: true
+  });
+}
+
+},{"./offline.js":2,"flickity":11,"jquery":18}],2:[function(require,module,exports){
+module.exports = {
+  init: function () {
+    if (!navigator.onLine) {
+      console.log('offline')
+      var offlineEl = document.createElement('div')
+      var text = document.createTextNode('U bent offline, u bekijkt nu een eerder bekeken versie van de website')
+      offlineEl.appendChild(text)
+      offlineEl.classList.add('offline')
+      document.body.appendChild(offlineEl)
+    }
+  }
+}
+},{}],3:[function(require,module,exports){
 /**
  * matchesSelector v2.0.2
  * matchesSelector( element, '.selector' )
@@ -64,7 +82,7 @@ var flkty = new Flickity(element, {
 
 }));
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 /**
  * EvEmitter v1.1.0
  * Lil' event emitter
@@ -178,7 +196,7 @@ return EvEmitter;
 
 }));
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 /**
  * Fizzy UI utils v2.0.7
  * MIT license
@@ -421,7 +439,7 @@ return utils;
 
 }));
 
-},{"desandro-matches-selector":2}],5:[function(require,module,exports){
+},{"desandro-matches-selector":3}],6:[function(require,module,exports){
 // add, remove cell
 ( function( window, factory ) {
   // universal module definition
@@ -584,7 +602,7 @@ return Flickity;
 
 }));
 
-},{"./flickity":9,"fizzy-ui-utils":4}],6:[function(require,module,exports){
+},{"./flickity":10,"fizzy-ui-utils":5}],7:[function(require,module,exports){
 // animate
 ( function( window, factory ) {
   // universal module definition
@@ -807,7 +825,7 @@ return proto;
 
 }));
 
-},{"fizzy-ui-utils":4}],7:[function(require,module,exports){
+},{"fizzy-ui-utils":5}],8:[function(require,module,exports){
 // Flickity.Cell
 ( function( window, factory ) {
   // universal module definition
@@ -901,7 +919,7 @@ return Cell;
 
 }));
 
-},{"get-size":16}],8:[function(require,module,exports){
+},{"get-size":17}],9:[function(require,module,exports){
 // drag
 ( function( window, factory ) {
   // universal module definition
@@ -1326,7 +1344,7 @@ return Flickity;
 
 }));
 
-},{"./flickity":9,"fizzy-ui-utils":4,"unidragger":19}],9:[function(require,module,exports){
+},{"./flickity":10,"fizzy-ui-utils":5,"unidragger":20}],10:[function(require,module,exports){
 // Flickity main
 ( function( window, factory ) {
   // universal module definition
@@ -2230,7 +2248,7 @@ return Flickity;
 
 }));
 
-},{"./animate":6,"./cell":7,"./slide":15,"ev-emitter":3,"fizzy-ui-utils":4,"get-size":16}],10:[function(require,module,exports){
+},{"./animate":7,"./cell":8,"./slide":16,"ev-emitter":4,"fizzy-ui-utils":5,"get-size":17}],11:[function(require,module,exports){
 /*!
  * Flickity v2.1.0
  * Touch, responsive, flickable carousels
@@ -2274,7 +2292,7 @@ return Flickity;
   return Flickity;
 });
 
-},{"./add-remove-cell":5,"./drag":8,"./flickity":9,"./lazyload":11,"./page-dots":12,"./player":13,"./prev-next-button":14}],11:[function(require,module,exports){
+},{"./add-remove-cell":6,"./drag":9,"./flickity":10,"./lazyload":12,"./page-dots":13,"./player":14,"./prev-next-button":15}],12:[function(require,module,exports){
 // lazyload
 ( function( window, factory ) {
   // universal module definition
@@ -2410,7 +2428,7 @@ return Flickity;
 
 }));
 
-},{"./flickity":9,"fizzy-ui-utils":4}],12:[function(require,module,exports){
+},{"./flickity":10,"fizzy-ui-utils":5}],13:[function(require,module,exports){
 // page dots
 ( function( window, factory ) {
   // universal module definition
@@ -2596,7 +2614,7 @@ return Flickity;
 
 }));
 
-},{"./flickity":9,"fizzy-ui-utils":4,"tap-listener":18}],13:[function(require,module,exports){
+},{"./flickity":10,"fizzy-ui-utils":5,"tap-listener":19}],14:[function(require,module,exports){
 // player & autoPlay
 ( function( window, factory ) {
   // universal module definition
@@ -2811,7 +2829,7 @@ return Flickity;
 
 }));
 
-},{"./flickity":9,"ev-emitter":3,"fizzy-ui-utils":4}],14:[function(require,module,exports){
+},{"./flickity":10,"ev-emitter":4,"fizzy-ui-utils":5}],15:[function(require,module,exports){
 // prev/next buttons
 ( function( window, factory ) {
   // universal module definition
@@ -3034,7 +3052,7 @@ return Flickity;
 
 }));
 
-},{"./flickity":9,"fizzy-ui-utils":4,"tap-listener":18}],15:[function(require,module,exports){
+},{"./flickity":10,"fizzy-ui-utils":5,"tap-listener":19}],16:[function(require,module,exports){
 // slide
 ( function( window, factory ) {
   // universal module definition
@@ -3114,7 +3132,7 @@ return Slide;
 
 }));
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 /*!
  * getSize v2.0.2
  * measure size of elements
@@ -3325,7 +3343,7 @@ return getSize;
 
 });
 
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.3.1
  * https://jquery.com/
@@ -13691,7 +13709,7 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 /*!
  * Tap listener v2.0.0
  * listens to taps
@@ -13806,7 +13824,7 @@ return TapListener;
 
 }));
 
-},{"unipointer":20}],19:[function(require,module,exports){
+},{"unipointer":21}],20:[function(require,module,exports){
 /*!
  * Unidragger v2.2.3
  * Draggable base class
@@ -14079,7 +14097,7 @@ return Unidragger;
 
 }));
 
-},{"unipointer":20}],20:[function(require,module,exports){
+},{"unipointer":21}],21:[function(require,module,exports){
 /*!
  * Unipointer v2.2.1
  * base class for doing one thing with pointer event
@@ -14377,4 +14395,4 @@ return Unipointer;
 
 }));
 
-},{"ev-emitter":3}]},{},[1]);
+},{"ev-emitter":4}]},{},[1]);
