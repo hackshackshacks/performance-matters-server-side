@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "browserify assets/js/main.js | uglifyjs > assets/js/bundle.js && node app.js"
+    "uglify": "browserify assets/js/main.js | uglifyjs > assets/js/bundle.js && uglifycss assets/css/main.css > assets/css/min.css",
+    "start": "npm run uglify && node app.js"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,7 @@
     "jquery": "^3.3.1",
     "minify": "^3.0.5",
     "nunjucks": "^3.1.2",
-    "request": "^2.85.0"
+    "request": "^2.85.0",
+    "uglifycss": "0.0.29"
   }
 }
