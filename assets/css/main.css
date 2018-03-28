@@ -222,6 +222,10 @@ nav.topNav a {
   transition: all 500ms;
 }
 
+.main-carousel > article {
+  margin-bottom: 4rem;
+}
+
 .main-carousel .carousel-cell {
   width: 100%;
   display: grid;
