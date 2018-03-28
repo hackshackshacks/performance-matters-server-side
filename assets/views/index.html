@@ -12,26 +12,12 @@
 <nav class="topNav">
   <div>
     {% for building in buildings %}
-    <a href="/{{ building.smallName }}/{{ currentTime }}" class="building {% if building.smallName === currentBuilding %}active{% endif %}">{{ building.name }}</a>
+    <a href="/{{ building.smallName }}/{{ currentTime }}seventies" class="building {% if building.smallName === currentBuilding %}active{% endif %}">{{ building.name }}</a>
     {% endfor %}
   </div>
 </nav>
-<nav class="subNav">
-  <div>
-    {% for time in times %}
-    <a href="/{{ currentBuilding }}/{{ time.smallName }}" class="date {% if time.smallName === currentTime %}active{% endif %}">{{ time.name }}</a>
-    {% endfor %}
-  </div>
 </nav>
-<div class="posters main-carousel">
-  {% for poster in posters %}
-  <article class="carousel-cell">
-    <div class="poster-text">
-      <h1>{{ poster.title }}</h1>
-      <h1>{{ poster.date }}</h1>
-    </div>
-    <img src="{{ poster.url }}" srcset="{{ poster.url }} 1x, {{ poster.url2 }} 2x" alt="">
-  </article>
-  {% endfor %}
-</div>
+<h2>Posters door de jaren heen</h2>
+<p>Ben je ook zo benieuwd wat er speelde in <a href="/paradiso/seventies">Paradiso in de jaren zeventig?</a></p>
+<p>Of in <a href="/melkweg/nineties">de Melkweg in de jaren negentig?</a></p>
 {% include "partials/footer.html" %}

@@ -130,12 +130,15 @@ const helper = {
 }
 
 core.init()
-setInterval(() => {
-  console.log('ckkkaaaasssss')
+setInterval(() => { // rerun every 24 hours
   core.init()
 }, 1000 * 60 * 60 * 24)
 app.get('/', (req, res) => {
-  res.redirect('/paradiso/seventies')
+  res.render('index.html', {
+    background: core.backgrounds[helper.randomize(0, core.backgrounds.length)].url,
+    times: core.times,
+    buildings: core.buildings
+  })
 })
 app.get('/:building/:time', (req, res) => {
   let building = req.params.building
@@ -146,13 +149,13 @@ app.get('/:building/:time', (req, res) => {
     let posterDate = new Date(poster.date)
     return posterDate >= currentDates[0] && posterDate <= currentDates[1] && poster.title.includes(buildingName)
   })
-  res.render('index.html', {
+  res.render('detail.html', {
     buildings: core.buildings,
     times: core.times,
     currentBuilding: building,
     currentTime: time,
     posters: currentPosters,
-    background: core.backgrounds[helper.randomize(0, core.backgrounds.length)].url
+    background: core.backgrounds[helper.randomize(0, core.backgrounds.length - 1)].url
   })
 })
 

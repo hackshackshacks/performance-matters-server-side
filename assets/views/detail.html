@@ -1,0 +1,37 @@
+{% include "partials/header.html" %}
+<style>
+  .background {
+    background-image: url("{{ background }}")
+  }
+</style>
+<div class="background"></div>
+<div id="loader-wrapper" class="hidden">
+    <div id="loader"></div>
+</div>
+<h1><a href="/">Imposters</a></h1>
+<nav class="topNav">
+  <div>
+    {% for building in buildings %}
+    <a href="/{{ building.smallName }}/{{ currentTime }}" class="building {% if building.smallName === currentBuilding %}active{% endif %}">{{ building.name }}</a>
+    {% endfor %}
+  </div>
+</nav>
+<nav class="subNav">
+  <div>
+    {% for time in times %}
+    <a href="/{{ currentBuilding }}/{{ time.smallName }}" class="date {% if time.smallName === currentTime %}active{% endif %}">{{ time.name }}</a>
+    {% endfor %}
+  </div>
+</nav>
+<div class="posters main-carousel">
+  {% for poster in posters %}
+  <article class="carousel-cell">
+    <div class="poster-text">
+      <h1>{{ poster.title }}</h1>
+      <h1>{{ poster.date }}</h1>
+    </div>
+    <img src="{{ poster.url }}" srcset="{{ poster.url }} 1x, {{ poster.url2 }} 2x" alt="">
+  </article>
+  {% endfor %}
+</div>
+{% include "partials/footer.html" %}
