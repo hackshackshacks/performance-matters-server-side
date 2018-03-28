@@ -4,8 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="/css/main.css">
   <link href="/manifest.json" rel="manifest">
+  <link href="/css/main.css" rel="preload" onload="this.rel='stylesheet'" as="style">
+  <noscript>
+      <link rel="stylesheet" href="/css/main.css">
+  </noscript>
   <title>Imposters</title>
 </head>
 <body>
